@@ -65,8 +65,7 @@
 
     <header id="header-404-xyz-technews" class="header-404 py-3">
         <div class="container mx-auto px-6 flex justify-between items-center">
-            <a href="http://maxcaulfield.online" target="_blank" rel="noopener noreferrer" class="text-xl font-bold hover:opacity-80 transition-opacity">
-                <span class="text-gradient-technews-xyz" data-translate-key="xyz_technews_site_name">TechNews by Max</span>
+            <a href="http://maxcaulfield.cn" target="_blank" rel="noopener noreferrer" class="text-xl font-bold hover:opacity-80 transition-opacity"> <span class="text-gradient-technews-xyz" data-translate-key="xyz_technews_site_name">TechNews by Max</span>
             </a>
             <div class="flex items-center space-x-3">
                 <button id="theme-toggle" aria-label="Toggle theme" class="p-2 rounded-full hover:bg-[var(--bg-glass)] transition-colors text-[var(--text-secondary)] hover:text-[var(--text-primary)]">
@@ -99,45 +98,45 @@
         <p class="text-lg text-[var(--text-secondary)] mb-8 max-w-md mx-auto" data-translate-key="message_404_xyz_technews">
             您好，科技前沿阵地正在铺设线路！MaxCaulfield 正在搜集最新的科技资讯 (maxcaulfield.xyz)，敬请期待！
         </p>
-        <a href="http://maxcaulfield.online" target="_blank" rel="noopener noreferrer" class="inline-block bg-[var(--text-accent)] text-[var(--bg-primary)] font-semibold py-3 px-8 rounded-full hover:opacity-80 transition-opacity duration-300" data-translate-key="button_temp_homepage">
-            返回临时主站
+        <a href="http://maxcaulfield.cn" target="_blank" rel="noopener noreferrer" class="inline-block bg-[var(--text-accent)] text-[var(--bg-primary)] font-semibold py-3 px-8 rounded-full hover:opacity-80 transition-opacity duration-300" data-translate-key="button_main_site">
+            前往主站
         </a>
     </main>
 
     <footer class="footer-404 py-4 text-center text-sm text-[var(--text-secondary)]">
         <p>&copy; <span id="current-year">2025</span> <span data-translate-key="xyz_technews_site_name_footer">TechNews by Max</span> (maxcaulfield.xyz)</p>
-    </footer>
+        </footer>
 
     <script>
         // --- Translations ---
         const translations = {
             'en': {
-                'title_404_xyz_technews': "Page Not Found (404) - TechNews by Max Under Construction", // Removed (.xyz) for cleaner title
-                'xyz_technews_site_name': "TechNews by Max", // Removed (.xyz)
+                'title_404_xyz_technews': "Page Not Found (404) - TechNews by Max Under Construction",
+                'xyz_technews_site_name': "TechNews by Max", // 保持不变，因为页眉的链接目标变了，但名称可以不变
                 'heading_404': "404",
-                'subheading_construction_xyz_technews': "TechNews is Under Rapid Construction...", // Removed (.xyz)
+                'subheading_construction_xyz_technews': "TechNews is Under Rapid Construction...",
                 'message_404_xyz_technews': "Hello! The tech frontier is currently being wired up for maxcaulfield.xyz. MaxCaulfield is gathering the latest tech news. Stay tuned!",
-                'button_temp_homepage': "Back to Temporary Homepage",
+                'button_main_site': "Go to Main Site", // 更新按钮文本翻译键
                 'current_lang_display': "EN",
                 'xyz_technews_site_name_footer': "TechNews by Max"
             },
             'zh-CN': {
-                'title_404_xyz_technews': "页面未找到 (404) - TechNews by Max 建设中", // 移除 (.xyz)
-                'xyz_technews_site_name': "TechNews by Max", // 移除 (.xyz)
+                'title_404_xyz_technews': "页面未找到 (404) - TechNews by Max 建设中",
+                'xyz_technews_site_name': "TechNews by Max",
                 'heading_404': "404",
-                'subheading_construction_xyz_technews': "TechNews 正在火速搭建中...", // 移除 (.xyz)
+                'subheading_construction_xyz_technews': "TechNews 正在火速搭建中...",
                 'message_404_xyz_technews': "您好，科技前沿阵地正在铺设线路！MaxCaulfield 正在搜集最新的科技资讯 (maxcaulfield.xyz)，敬请期待！",
-                'button_temp_homepage': "返回临时主站",
+                'button_main_site': "前往主站", // 更新按钮文本翻译键
                 'current_lang_display': "简",
                 'xyz_technews_site_name_footer': "TechNews by Max"
             },
             'zh-TW': {
-                'title_404_xyz_technews': "頁面未找到 (404) - TechNews by Max 建設中", // 移除 (.xyz)
-                'xyz_technews_site_name': "TechNews by Max", // 移除 (.xyz)
+                'title_404_xyz_technews': "頁面未找到 (404) - TechNews by Max 建設中",
+                'xyz_technews_site_name': "TechNews by Max",
                 'heading_404': "404",
-                'subheading_construction_xyz_technews': "TechNews 正在火速搭建中...", // 移除 (.xyz)
+                'subheading_construction_xyz_technews': "TechNews 正在火速搭建中...",
                 'message_404_xyz_technews': "您好，科技前沿陣地正在鋪設線路！MaxCaulfield 正在蒐集最新的科技資訊 (maxcaulfield.xyz)，敬請期待！",
-                'button_temp_homepage': "返回臨時主站",
+                'button_main_site': "前往主站", // 更新按钮文本翻译键
                 'current_lang_display': "繁",
                 'xyz_technews_site_name_footer': "TechNews by Max"
             }
@@ -148,7 +147,7 @@
         const langToggle = document.getElementById('lang-toggle');
         const langDropdown = document.getElementById('lang-dropdown');
         const currentLangSpan = document.getElementById('current-lang');
-        const header404 = document.getElementById('header-404-xyz-technews'); // Corrected ID
+        const header404 = document.getElementById('header-404-xyz-technews'); 
         
         let currentLang = localStorage.getItem('language') || 'zh-CN';
         let currentTheme = localStorage.getItem('theme') || 'dark';
