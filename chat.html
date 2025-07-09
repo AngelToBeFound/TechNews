@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI对话 - 康治AI</title>
+    <style>
+        /* --- 全局与基础样式 --- */
+        :root {
+            --primary-color: #3498db; /* 科技蓝 */
+            --secondary-color: #2ecc71; /* 活力绿 */
+            --dark-color: #2c3e50; /* 深灰蓝 */
+            --light-gray: #f4f6f8; /* 页面背景色 */
+            --white-color: #ffffff;
+            --text-color: #333;
+            --border-radius: 20px;
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            font-family: var(--font-family);
+            background-color: var(--light-gray);
+            overflow: hidden; /* 防止页面滚动 */
+        }
+
+        /* --- 主聊天容器布局 --- */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100%;
+            max-width: 1000px; /* 限制最大宽度，桌面端更好看 */
+            margin: 0 auto;
+            background-color: var(--white-color);
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+        }
+
+        /* --- 聊天头部 --- */
+        .chat-header {
+            display: flex;
+            align-items: center;
+            padding: 15px 25px;
+            background-color: var(--white-color);
+            border-bottom: 1px solid #eef1f5;
+            flex-shrink: 0;
+        }
+        
+        .chat-header .back-button {
+            font-size: 1.5em;
+            color: var(--dark-color);
+            text-decoration: none;
+            margin-right: 15px;
+        }
+
+        .chat-header .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+        
+        .chat-header .info .name {
+            font-weight: 600;
+            font-size: 1.1em;
+            color: var(--dark-color);
+        }
+
+        .chat-header .info .status {
+            font-size: 0.85em;
+            color: var(--secondary-color);
+        }
+        .chat-header .info .status::before {
+            content: '●';
+            margin-right: 5px;
+            font-size: 0.8em;
+        }
+
+        /* --- 消息区域 --- */
+        .chat-messages {
+            flex-grow: 1;
+            padding: 30px;
+            overflow-y: auto; /* 允许消息区滚动 */
+            display: flex;
+            flex-direction: column;
+        }
+        /* 美化滚动条 */
+        .chat-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: #ccc;
+            border-radius: 3px;
+        }
+        .chat-messages::-webkit-scrollbar-thumb:hover {
+            background: #aaa;
+        }
+
+
+        /* --- 消息气泡 --- */
+        .message-bubble {
+            max-width: 70%;
+            padding: 12px 20px;
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            line-height: 1.6;
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* AI发出的消息 (左侧) */
+        .message-bubble.ai {
+            background-color: #eef1f5;
+            color: var(--text-color);
+            border-bottom-left-radius: 5px;
+            align-self: flex-start;
+        }
+
+        /* 用户发出的消息 (右侧) */
+        .message-bubble.user {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border-bottom-right-radius: 5px;
+            align-self: flex-end;
+        }
+        
+        /* 正在输入指示器 */
+        .message-bubble.typing {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+        }
+        .typing span {
+            height: 8px;
+            width: 8px;
+            background-color: #999;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 2px;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        .typing span:nth-child(1) { animation-delay: -0.32s; }
+        .typing span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1.0); }
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* --- 输入区域 --- */
+        .chat-input-form {
+            display: flex;
+            align-items: center;
+            padding: 20px 25px;
+            background-color: var(--white-color);
+            border-top: 1px solid #eef1f5;
+            flex-shrink: 0;
+        }
+
+        .chat-input {
+            flex-grow: 1;
+            border: none;
+            background-color: var(--light-gray);
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            font-size: 1em;
+            outline: none;
+            transition: box-shadow 0.3s;
+        }
+        .chat-input:focus {
+            box-shadow: 0 0 0 2px var(--primary-color);
+        }
+
+        .send-button {
+            background: var(--primary-color);
+            border: none;
+            color: var(--white-color);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-left: 15px;
+            font-size: 1.5em;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .send-button:hover {
+            background-color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+        .send-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+            transform: scale(1);
+        }
+        
+        /* --- 响应式设计 --- */
+        @media (max-width: 768px) {
+            .chat-container {
+                box-shadow: none;
+            }
+            .chat-header, .chat-input-form {
+                padding: 15px;
+            }
+            .chat-messages {
+                padding: 15px;
+            }
+            .message-bubble {
+                max-width: 80%;
+            }
+            .chat-header .back-button {
+                margin-right: 10px;
+            }
+            .chat-header .avatar {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="chat-container">
+        <header class="chat-header">
+            <a href="index.html" class="back-button" aria-label="返回首页">‹</a>
+            <div class="avatar">AI</div>
+            <div class="info">
+                <div class="name">康治AI 智能伙伴</div>
+                <div class="status">在线</div>
+            </div>
+        </header>
+
+        <main class="chat-messages" id="chat-messages">
+            </main>
+
+        <footer class="chat-input-form">
+            <input type="text" id="message-input" class="chat-input" placeholder="请在这里输入您的问题..." autocomplete="off">
+            <button id="send-button" class="send-button" aria-label="发送">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="pointer-events: none;"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"></path></svg>
+            </button>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const chatMessages = document.getElementById('chat-messages');
+            const messageInput = document.getElementById('message-input');
+            const sendButton = document.getElementById('send-button');
+            const chatForm = document.querySelector('.chat-input-form');
+
+            // 模拟的AI回复库
+            const aiResponses = {
+                "你好": "你好！很高兴为您服务。您可以问我关于心理、皮肤健康或营养运动方面的问题。",
+                "压力": "感到压力是很正常的。可以和我聊聊是什么让您感到压力吗？或者我们可以尝试一些放松练习。",
+                "皮肤": "当然，请具体描述您的皮肤问题，或者可以拍照让我分析。例如，是痘痘、干燥还是泛红呢？",
+                "痘痘": "长痘痘很常见，通常与内分泌、饮食和清洁有关。请问您的痘痘主要长在哪个部位？最近饮食和作息如何？",
+                "减肥": "健康的减肥需要科学的饮食和适度的运动。我可以为您制定一个初步的计划。请问您目前的体重和身高是多少？",
+                "失眠": "失眠很痛苦。是难以入睡，还是容易早醒？最近有什么心事吗？",
+                "default": "嗯嗯，我在听。您可以说得更具体一些吗？"
+            };
+
+            // AI欢迎语
+            function showWelcomeMessage() {
+                addMessageToChat('ai', '您好！我是康治AI，您的专属健康伙伴。请问有什么可以帮您的吗？您可以直接输入问题，例如“我最近压力很大怎么办？”');
+            }
+            
+            // 将消息添加到聊天窗口
+            function addMessageToChat(sender, message) {
+                const messageBubble = document.createElement('div');
+                messageBubble.classList.add('message-bubble', sender);
+                messageBubble.textContent = message;
+                chatMessages.appendChild(messageBubble);
+                scrollToBottom();
+            }
+            
+            // 滚动到底部
+            function scrollToBottom() {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            // 显示“正在输入”指示器
+            function showTypingIndicator() {
+                const typingBubble = document.createElement('div');
+                typingBubble.classList.add('message-bubble', 'ai', 'typing');
+                typingBubble.id = 'typing-indicator';
+                typingBubble.innerHTML = '<span></span><span></span><span></span>';
+                chatMessages.appendChild(typingBubble);
+                scrollToBottom();
+            }
+
+            // 移除“正在输入”指示器
+            function hideTypingIndicator() {
+                const typingIndicator = document.getElementById('typing-indicator');
+                if (typingIndicator) {
+                    typingIndicator.remove();
+                }
+            }
+            
+            // 模拟AI回复
+            function getAiResponse(userMessage) {
+                userMessage = userMessage.toLowerCase();
+                for (const key in aiResponses) {
+                    if (userMessage.includes(key)) {
+                        return aiResponses[key];
+                    }
+                }
+                return aiResponses['default'];
+            }
+
+            // 处理发送消息
+            function handleSendMessage(e) {
+                // 阻止表单默认的提交刷新行为
+                if(e) e.preventDefault();
+                
+                const message = messageInput.value.trim();
+                if (message === '') return;
+
+                // 1. 在界面上显示用户发送的消息
+                addMessageToChat('user', message);
+                messageInput.value = '';
+                
+                // 禁用发送按钮，防止重复发送
+                sendButton.disabled = true;
+
+                // 2. 显示“正在输入”
+                showTypingIndicator();
+                
+                // 3. 模拟AI思考并回复
+                setTimeout(() => {
+                    hideTypingIndicator();
+                    const aiMessage = getAiResponse(message);
+                    addMessageToChat('ai', aiMessage);
+                    sendButton.disabled = false; // 恢复按钮
+                }, Math.random() * 1500 + 500); // 模拟500ms到2000ms的随机延迟
+            }
+
+            // 绑定事件
+            chatForm.addEventListener('submit', handleSendMessage);
+            sendButton.addEventListener('click', handleSendMessage);
+            
+            // 页面加载后显示欢迎语
+            setTimeout(showWelcomeMessage, 500);
+        });
+    </script>
+</body>
+</html>
