@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>康治AI+医疗服务 - 专为高校学生定做</title>
+    <style>
+        /* --- 全局样式 --- */
+        :root {
+            --primary-color: #3498db; /* 科技蓝 */
+            --secondary-color: #2ecc71; /* 活力绿 */
+            --dark-color: #2c3e50; /* 深灰蓝 */
+            --light-color: #ecf0f1; /* 浅灰 */
+            --white-color: #ffffff;
+            --text-color: #555;
+            --border-radius: 12px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--white-color);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            color: var(--dark-color);
+            font-weight: 700;
+        }
+
+        h1 { font-size: 3em; }
+        h2 { font-size: 2.2em; text-align: center; margin-bottom: 50px; }
+        h3 { font-size: 1.5em; }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-light {
+            background-color: #f9f9f9;
+        }
+
+        /* --- 导航栏 --- */
+        .navbar {
+            background: var(--white-color);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar-logo {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        .navbar-logo span {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* --- 英雄区 --- */
+        .hero {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(46, 204, 113, 0.1));
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+            color: #666;
+            animation: fadeInUp 1s ease-out 0.5s;
+            animation-fill-mode: both;
+        }
+
+        .cta-button {
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.6);
+        }
+
+        /* --- 服务区 --- */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background: var(--white-color);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+        }
+
+        .service-card .icon {
+            font-size: 3em;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 15px;
+        }
+
+        /* --- 为何选择我们 --- */
+        .features-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 30px;
+        }
+
+        .feature-item .icon {
+            font-size: 2em;
+            color: var(--secondary-color);
+            margin-right: 20px;
+            margin-top: 5px;
+        }
+        
+        .feature-image {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        /* --- 如何使用 --- */
+        .how-it-works-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+            text-align: center;
+        }
+
+        .step .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary-color);
+            color: var(--white-color);
+            border-radius: 50%;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        /* --- 用户评价 --- */
+        .testimonial-card {
+            background: var(--white-color);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        .testimonial-card p {
+             font-style: italic;
+        }
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .testimonial-author img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        .author-info strong {
+            display: block;
+            color: var(--dark-color);
+        }
+
+        /* --- CTA区块 --- */
+        .cta-section {
+            background: var(--dark-color);
+            color: var(--white-color);
+            text-align: center;
+            padding: 80px 0;
+        }
+        .cta-section h2 {
+            color: var(--white-color);
+        }
+        .cta-section p {
+            font-size: 1.1em;
+            max-width: 600px;
+            margin: 0 auto 40px;
+        }
+        .cta-section .cta-button {
+            background-color: var(--secondary-color);
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.4);
+        }
+        .cta-section .cta-button:hover {
+            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.6);
+        }
+        
+        /* --- 页脚 --- */
+        .footer {
+            background-color: #212832;
+            color: #aeb9c4;
+            padding: 50px 0;
+            text-align: center;
+        }
+        .footer .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            display: flex;
+            gap: 25px;
+        }
+        .footer-links a {
+            color: #aeb9c4;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover {
+            color: var(--white-color);
+        }
+        .copyright {
+            font-size: 0.9em;
+        }
+
+        /* --- 响应式设计 --- */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            .hero h1 { font-size: 2.8em; }
+            h2 { font-size: 1.8em; }
+
+            .nav-links { display: none; } /* 简化处理，实际项目可做成汉堡菜单 */
+            .features-grid { grid-template-columns: 1fr; }
+            .feature-image { margin-top: 40px; }
+            .how-it-works-grid { grid-template-columns: 1fr; }
+        }
+
+        /* --- 动画 --- */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <a href="#" class="navbar-logo">康治AI<span>+</span></a>
+            <ul class="nav-links">
+                <li><a href="#services">我们的服务</a></li>
+                <li><a href="#why-us">为何选择</a></li>
+                <li><a href="#how-it-works">如何使用</a></li>
+                <li><a href="#testimonials">用户故事</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>你的<span style="color: var(--primary-color);">专属AI健康伙伴</span>，就在校园里</h1>
+                <p>告别请假烦恼，无需奔波医院。康治AI，用前沿科技守护你的青春健康，让你专注学业，无忧追梦。</p>
+                <a href="#" class="cta-button">立即体验 首次免费</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="services" class="section">
+            <div class="container">
+                <h2>专为大学生定制的AI医疗服务</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="icon">🧠</div>
+                        <h3>AI心理咨询师</h3>
+                        <p>24/7在线，随时倾听你的烦恼。无论是学业压力、人际关系还是情绪波动，AI伙伴都能提供专业的初步疏导和建议，完全匿名，守护你的隐私。</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">🧴</div>
+                        <h3>智能皮肤健康分析</h3>
+                        <p>熬夜爆痘？季节性过敏？拍张照，AI即可智能分析你的皮肤状况，提供个性化的护肤建议和非处方用药指导，让青春不留“痘”。</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">🥗</div>
+                        <h3>个性化营养与运动规划</h3>
+                        <p>根据你的体质、学习强度和健康目标，AI为你量身定做每日营养餐单和运动计划。无论是增肌减脂，还是健康饮食，都能轻松搞定。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-us" class="section section-light">
+            <div class="container">
+                 <h2>更懂你的健康选择</h2>
+                <div class="features-grid">
+                    <div class="feature-text">
+                        <div class="feature-item">
+                            <div class="icon">🕒</div>
+                            <div>
+                                <h3>即时响应，无需等待</h3>
+                                <p>打破时空限制，7x24小时随时随地获得健康支持，完美契合大学生的作息时间。</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="icon">🤫</div>
+                            <div>
+                                <h3>绝对隐私，安心倾诉</h3>
+                                <p>采用银行级数据加密，所有对话和信息严格保密，让你无惧尴尬，坦诚交流。</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="icon">💰</div>
+                            <div>
+                                <h3>经济实惠，学生专享</h3>
+                                <p>我们深知学生的预算有限，提供远低于传统医疗咨询的定价，并有校园专属优惠。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-image-container">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop" alt="医生使用平板电脑" class="feature-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="section">
+            <div class="container">
+                <h2>三步，开启你的健康新方式</h2>
+                <div class="how-it-works-grid">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>注册并完善信息</h3>
+                        <p>仅需手机号或学生邮箱即可快速注册，简单填写基本健康问卷，让AI更懂你。</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>选择服务并开始互动</h3>
+                        <p>根据你的需求选择相应服务，无论是文字对话、拍照上传，都能立即得到AI的反馈。</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>获取个性化报告</h3>
+                        <p>AI将生成详细的健康分析报告和可行性建议，并持续追踪你的健康状况变化。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section section-light">
+             <div class="container">
+                <h2>听听学长学姐怎么说</h2>
+                <div class="services-grid">
+                    <div class="testimonial-card">
+                        <p>"考研压力大的时候，半夜睡不着，多亏了康治AI的心理伙伴，陪我聊了很久，感觉好多了。比跟同学说要轻松，不用担心被评价。真心推荐！"</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=1780&auto=format&fit=crop" alt="用户头像">
+                            <div class="author-info">
+                                <strong>王同学</strong>
+                                <span>计算机科学与技术学院</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"我脸上的痘痘一直反反复复，用了康治的皮肤分析，才知道是清洁不到位加屏障受损。按照它的建议调整了护肤品，现在皮肤稳定多了。比自己瞎试强太多了！"</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1614283233556-f35b0c801435?q=80&w=1887&auto=format&fit=crop" alt="用户头像">
+                            <div class="author-info">
+                                <strong>李同学</strong>
+                                <span>设计艺术学院</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </section>
+        
+        <section class="cta-section">
+            <div class="container">
+                <h2>准备好拥抱更健康的大学生活了吗？</h2>
+                <p>立即加入康治AI，让科技的力量成为你最坚实的后盾。你的第一个AI健康咨询，我们请客！</p>
+                <a href="#" class="cta-button">免费开始我的健康之旅</a>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <ul class="footer-links">
+                <li><a href="#">关于我们</a></li>
+                <li><a href="#">服务条款</a></li>
+                <li><a href="#">隐私政策</a></li>
+                <li><a href="#">联系我们</a></li>
+            </ul>
+            <p class="copyright">&copy; 2025 康治AI. All Rights Reserved. 专为高校学子打造。</p>
+            <p style="font-size: 0.8em; margin-top: 10px;">免责声明：本服务提供的AI建议不能替代执业医师的诊断。如遇紧急情况，请立即联系校医院或拨打120。</p>
+        </div>
+    </footer>
+
+</body>
+</html>
