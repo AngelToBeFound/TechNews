@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用指南 & FAQ - 康治AI</title>
+    <style>
+        /* --- 全局样式 (同上) --- */
+        :root {
+            --primary-color: #3498db; /* 科技蓝 */
+            --secondary-color: #2ecc71; /* 活力绿 */
+            --dark-color: #2c3e50; /* 深灰蓝 */
+            --light-color: #ecf0f1; /* 浅灰 */
+            --white-color: #ffffff;
+            --text-color: #555;
+            --border-radius: 12px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--white-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            padding-top: 80px; /* 为固定导航栏预留空间 */
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        h1, h2, h3 { color: var(--dark-color); font-weight: 700; }
+        h1 { font-size: 3em; text-align: center; margin-bottom: 20px;}
+        h2 { font-size: 2.2em; text-align: center; margin-bottom: 50px;}
+        .page-subtitle { text-align: center; font-size: 1.2em; color: #777; max-width: 700px; margin: 0 auto 80px; }
+        .section { padding: 80px 0; }
+        .section-light { background-color: #f9f9f9; }
+        /* --- 导航栏 (同上) --- */
+        .navbar { background: var(--white-color); padding: 15px 0; position: fixed; width: 100%; top: 0; left: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+        .navbar-logo { font-size: 1.8em; font-weight: bold; color: var(--primary-color); text-decoration: none; }
+        .navbar-logo span { color: var(--secondary-color); }
+        .nav-links { list-style: none; margin: 0; padding: 0; display: flex; }
+        .nav-links li { margin-left: 30px; }
+        .nav-links a { text-decoration: none; color: var(--dark-color); font-weight: 500; transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--primary-color); }
+        
+        /* --- FAQ 手风琴样式 --- */
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            border-bottom: 1px solid #ddd;
+        }
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            text-align: left;
+            font-size: 1.2em;
+            font-weight: 600;
+            padding: 20px 0;
+            cursor: pointer;
+            color: var(--dark-color);
+            position: relative;
+            padding-right: 40px;
+        }
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5em;
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            transition: transform 0.3s;
+        }
+        .faq-item.active .faq-question::after {
+            transform: translateY(-50%) rotate(45deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+        .faq-answer p {
+            padding: 0 10px 20px;
+            margin: 0;
+        }
+        
+        /* --- 页脚 (同上) --- */
+        .footer { background-color: #212832; color: #aeb9c4; padding-top: 50px; }
+        /* ... 省略页脚其他样式 ... */
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+       </nav>
+    
+    <main>
+        <section class="section">
+            <div class="container">
+                <h1>常见问题 (FAQ)</h1>
+                <p class="page-subtitle">有疑问？别担心，我们为你整理了最常见的问题和答案。如果这里没有你想要的，随时可以联系我们。</p>
+                
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question">康治AI的服务是免费的吗？</button>
+                        <div class="faq-answer">
+                            <p>我们为所有高校学生提供首次免费体验所有核心功能。后续使用我们会提供极其优惠的、专为学生设计的订阅套餐，确保人人都能用得起。具体价格请在App内查看。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">我的个人数据和隐私安全吗？</button>
+                        <div class="faq-answer">
+                            <p>绝对安全。我们视用户隐私为生命线。所有数据均采用端到端加密，并进行匿名化处理。我们绝不会与任何第三方分享你的个人可识别信息。详情请阅读我们的《隐私政策》。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">AI的诊断建议可靠吗？可以替代医生吗？</button>
+                        <div class="faq-answer">
+                            <p>我们的AI基于海量专业数据训练，准确率在行业内领先，是非常有价值的健康参考。但是，它不能替代执业医师的诊断。AI旨在为你提供初步筛查、健康管理和生活方式建议。如遇严重或紧急情况，请务必前往医院就诊。</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <button class="faq-question">如何开始使用康治AI？</button>
+                        <div class="faq-answer">
+                            <p>非常简单！第一步：通过手机应用商店下载“康治AI” App。第二步：使用你的学生邮箱完成认证和注册。第三步：根据引导完成基本健康问卷，然后就可以开始探索各项功能了！</p>
+                        </div>
+                    </div>
+                     <div class="faq-item">
+                        <button class="faq-question">心理咨询的AI真的能理解我吗？</button>
+                        <div class="faq-answer">
+                            <p>我们的心理AI伙伴经过特殊的情感计算模型训练，擅长识别对话中的情绪并作出有共情力的回应。它不会评判你，是一个完全安全的倾诉对象。虽然它无法完全复制人类的复杂情感，但它在提供支持、引导思考和教授应对技巧方面非常有效。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        </footer>
+
+    <script>
+        const faqItems = document.querySelectorAll('.faq-item');
+
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            const answer = item.querySelector('.faq-answer');
+
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-answer').style.maxHeight = 0;
+                });
+
+                // Open the clicked item if it wasn't active
+                if (!isActive) {
+                    item.classList.add('active');
+                    answer.style.maxHeight = answer.scrollHeight + 'px';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
