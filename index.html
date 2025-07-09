@@ -125,10 +125,27 @@
 
         .hero p {
             font-size: 1.2em;
-            margin-bottom: 40px;
+            margin-bottom: 30px; /* 调整间距 */
             color: #666;
             animation: fadeInUp 1s ease-out 0.5s;
             animation-fill-mode: both;
+        }
+        
+        /* --- 新增：技术声明样式 --- */
+        .tech-credit {
+            margin-bottom: 40px; /* 调整间距 */
+            animation: fadeInUp 1s ease-out 0.8s;
+            animation-fill-mode: both;
+        }
+        
+        .tech-credit span {
+            display: inline-block;
+            background-color: rgba(44, 62, 80, 0.08);
+            color: var(--dark-color);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.9em;
+            font-weight: 500;
         }
 
         .cta-button {
@@ -142,6 +159,8 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
             display: inline-block;
+            animation: fadeInUp 1s ease-out 1s;
+            animation-fill-mode: both;
         }
 
         .cta-button:hover {
@@ -377,6 +396,11 @@
             <div class="hero-content">
                 <h1>你的<span style="color: var(--primary-color);">专属AI健康伙伴</span>，就在校园里</h1>
                 <p>告别请假烦恼，无需奔波医院。康治AI，用前沿科技守护你的青春健康，让你专注学业，无忧追梦。</p>
+                
+                <div class="tech-credit">
+                    <span>核心技术由 DeepSeek-V2 8B 模型强力驱动</span>
+                </div>
+
                 <a href="chat.html" class="cta-button">立即体验 首次免费</a>
             </div>
         </div>
