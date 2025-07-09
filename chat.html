@@ -13,6 +13,9 @@
             --light-gray: #f4f6f8; /* 页面背景色 */
             --white-color: #ffffff;
             --text-color: #333;
+            --warning-bg-color: #fff3cd; /* 提示横幅背景色 */
+            --warning-text-color: #856404; /* 提示横幅文字颜色 */
+            --warning-border-color: #ffeeba; /* 提示横幅边框颜色 */
             --border-radius: 20px;
             --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
         }
@@ -25,16 +28,82 @@
             overflow: hidden; /* 防止页面滚动 */
         }
 
+        /* --- 新增：顶部提示横幅样式 --- */
+        .offline-banner {
+            background-color: var(--warning-bg-color);
+            color: var(--warning-text-color);
+            border-bottom: 1px solid var(--warning-border-color);
+            padding: 15px 25px;
+            text-align: center;
+            font-size: 0.95em;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .offline-banner p {
+            margin: 0 0 15px 0;
+        }
+
+        .offline-banner .button-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .offline-banner .action-button {
+            background-color: var(--warning-text-color);
+            color: var(--white-color);
+            padding: 8px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9em;
+            transition: background-color 0.3s, transform 0.2s;
+            display: inline-block;
+        }
+
+        .offline-banner .action-button:hover {
+            background-color: #634b03;
+            transform: translateY(-2px);
+        }
+        
+        .offline-banner .close-button {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            font-size: 1.8em;
+            color: var(--warning-text-color);
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s;
+        }
+        
+        .offline-banner .close-button:hover {
+            opacity: 1;
+        }
+
         /* --- 主聊天容器布局 --- */
         .chat-container {
             display: flex;
             flex-direction: column;
-            height: 100vh;
+            /* 使用calc()函数动态计算高度，减去横幅的高度 */
+            height: 100vh; 
             width: 100%;
             max-width: 1000px; /* 限制最大宽度，桌面端更好看 */
             margin: 0 auto;
             background-color: var(--white-color);
             box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+            transition: height 0.4s ease;
+        }
+
+        body.banner-visible .chat-container {
+            /* 如果横幅可见，聊天容器高度需要动态计算 */
+            height: calc(100vh - var(--banner-height, 130px));
         }
 
         /* --- 聊天头部 --- */
@@ -210,6 +279,16 @@
         
         /* --- 响应式设计 --- */
         @media (max-width: 768px) {
+             .offline-banner {
+                padding: 15px;
+                text-align: left;
+            }
+             .offline-banner p {
+                padding-right: 30px; /* 给关闭按钮留出空间 */
+             }
+             .offline-banner .close-button {
+                right: 10px;
+             }
             .chat-container {
                 box-shadow: none;
             }
@@ -233,9 +312,16 @@
 
     </style>
 </head>
-<body>
+<body class="banner-visible"> <div class="offline-banner" id="offline-banner">
+        <p>因为国际互联网通讯等不可抗力问题，您无法在线体验智能大模型，您可以移步至 Hugging Face 来下载进行本地部署，具体教程请参见相关博客，给您带来的不便，请您谅解。</p>
+        <div class="button-group">
+            <a href="https://huggingface.co/LittleMax24/HealthModel" target="_blank" rel="noopener noreferrer" class="action-button">下载HealthModel模型</a>
+            <a href="https://www.cnblogs.com/xiezhr/p/18712410" target="_blank" rel="noopener noreferrer" class="action-button">查看本地部署教程</a>
+        </div>
+        <button class="close-button" id="close-banner-button" aria-label="关闭提示">&times;</button>
+    </div>
 
-    <div class="chat-container">
+    <div class="chat-container" id="chat-container">
         <header class="chat-header">
             <a href="index.html" class="back-button" aria-label="返回首页">‹</a>
             <div class="avatar">AI</div>
@@ -258,6 +344,22 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- 顶部横幅控制 ---
+            const offlineBanner = document.getElementById('offline-banner');
+            const closeBannerButton = document.getElementById('close-banner-button');
+            const body = document.body;
+            
+            // 动态设置--banner-height变量，以便CSS可以引用
+            const bannerHeight = offlineBanner.offsetHeight;
+            document.documentElement.style.setProperty('--banner-height', `${bannerHeight}px`);
+
+            closeBannerButton.addEventListener('click', () => {
+                offlineBanner.style.display = 'none';
+                body.classList.remove('banner-visible');
+            });
+
+
+            // --- 聊天功能控制 ---
             const chatMessages = document.getElementById('chat-messages');
             const messageInput = document.getElementById('message-input');
             const sendButton = document.getElementById('send-button');
