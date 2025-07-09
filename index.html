@@ -107,6 +107,8 @@
             display: flex;
             align-items: center;
             text-align: center;
+            padding-top: 80px; /* 补偿固定的导航栏高度 */
+            box-sizing: border-box;
         }
 
         .hero-content {
@@ -139,6 +141,7 @@
             font-size: 1.1em;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+            display: inline-block;
         }
 
         .cta-button:hover {
@@ -247,6 +250,7 @@
             height: 50px;
             border-radius: 50%;
             margin-right: 15px;
+            object-fit: cover;
         }
         .author-info strong {
             display: block;
@@ -280,43 +284,66 @@
         .footer {
             background-color: #212832;
             color: #aeb9c4;
-            padding: 50px 0;
-            text-align: center;
+            padding: 60px 0 20px 0;
         }
-        .footer .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        .footer-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+            gap: 40px; 
+            text-align: left; 
+            width: 100%; 
+            margin-bottom: 50px; 
         }
-        .footer-links {
-            list-style: none;
-            padding: 0;
-            margin: 20px 0;
-            display: flex;
-            gap: 25px;
+        .footer-col h4 { 
+            color: var(--white-color); 
+            margin-bottom: 20px; 
+            font-size: 1.1em;
         }
-        .footer-links a {
-            color: #aeb9c4;
-            text-decoration: none;
-            transition: color 0.3s;
+        .footer-col p {
+            padding-right: 20px;
         }
-        .footer-links a:hover {
-            color: var(--white-color);
+        .footer-links-list { 
+            list-style: none; 
+            padding: 0; 
+            margin: 0;
         }
-        .copyright {
-            font-size: 0.9em;
+        .footer-links-list li { 
+            margin-bottom: 12px; 
+        }
+        .footer-links-list a { 
+            color: #aeb9c4; 
+            text-decoration: none; 
+            transition: color 0.3s, padding-left 0.3s; 
+        }
+        .footer-links-list a:hover { 
+            color: var(--white-color); 
+            padding-left: 5px; 
+        }
+        .copyright-section { 
+            border-top: 1px solid #444; 
+            padding-top: 30px; 
+            margin-top: 30px; 
+            width: 100%; 
+            text-align: center; 
+        }
+        .copyright { 
+            font-size: 0.9em; 
         }
 
+
         /* --- 响应式设计 --- */
+        @media (max-width: 992px) {
+             .features-grid { grid-template-columns: 1fr; }
+             .feature-image { margin-top: 40px; }
+        }
+        
         @media (max-width: 768px) {
             h1 { font-size: 2.5em; }
             .hero h1 { font-size: 2.8em; }
             h2 { font-size: 1.8em; }
 
             .nav-links { display: none; } /* 简化处理，实际项目可做成汉堡菜单 */
-            .features-grid { grid-template-columns: 1fr; }
-            .feature-image { margin-top: 40px; }
-            .how-it-works-grid { grid-template-columns: 1fr; }
+            .how-it-works-grid { grid-template-columns: 1fr; gap: 40px; }
         }
 
         /* --- 动画 --- */
@@ -332,6 +359,7 @@
     </style>
 </head>
 <body>
+
     <nav class="navbar">
         <div class="container">
             <a href="index.html" class="navbar-logo">康治AI<span>+</span></a>
@@ -343,6 +371,144 @@
             </ul>
         </div>
     </nav>
+
+    <header class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>你的<span style="color: var(--primary-color);">专属AI健康伙伴</span>，就在校园里</h1>
+                <p>告别请假烦恼，无需奔波医院。康治AI，用前沿科技守护你的青春健康，让你专注学业，无忧追梦。</p>
+                <a href="chat.html" class="cta-button">立即体验 首次免费</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section id="services" class="section">
+            <div class="container">
+                <h2>专为大学生定制的AI医疗服务</h2>
+                <div class="services-grid">
+                    <div class="service-card">
+                        <div class="icon">🧠</div>
+                        <h3>AI心理咨询师</h3>
+                        <p>24/7在线，随时倾听你的烦恼。无论是学业压力、人际关系还是情绪波动，AI伙伴都能提供专业的初步疏导和建议，完全匿名，守护你的隐私。</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">🧴</div>
+                        <h3>智能皮肤健康分析</h3>
+                        <p>熬夜爆痘？季节性过敏？拍张照，AI即可智能分析你的皮肤状况，提供个性化的护肤建议和非处方用药指导，让青春不留“痘”。</p>
+                    </div>
+                    <div class="service-card">
+                        <div class="icon">🥗</div>
+                        <h3>个性化营养与运动规划</h3>
+                        <p>根据你的体质、学习强度和健康目标，AI为你量身定做每日营养餐单和运动计划。无论是增肌减脂，还是健康饮食，都能轻松搞定。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="why-us" class="section section-light">
+            <div class="container">
+                 <h2>更懂你的健康选择</h2>
+                <div class="features-grid">
+                    <div class="feature-text">
+                        <div class="feature-item">
+                            <div class="icon">🕒</div>
+                            <div>
+                                <h3>即时响应，无需等待</h3>
+                                <p>打破时空限制，7x24小时随时随地获得健康支持，完美契合大学生的作息时间。</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="icon">🤫</div>
+                            <div>
+                                <h3>绝对隐私，安心倾诉</h3>
+                                <p>采用银行级数据加密，所有对话和信息严格保密，让你无惧尴尬，坦诚交流。</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="icon">💰</div>
+                            <div>
+                                <h3>经济实惠，学生专享</h3>
+                                <p>我们深知学生的预算有限，提供远低于传统医疗咨询的定价，并有校园专属优惠。</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-image-container">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=2070&auto=format&fit=crop" alt="医生使用平板电脑" class="feature-image">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="section">
+            <div class="container">
+                <h2>三步，开启你的健康新方式</h2>
+                <div class="how-it-works-grid">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h3>注册并完善信息</h3>
+                        <p>仅需手机号或学生邮箱即可快速注册，简单填写基本健康问卷，让AI更懂你。</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h3>选择服务并开始互动</h3>
+                        <p>根据你的需求选择相应服务，无论是文字对话、拍照上传，都能立即得到AI的反馈。</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h3>获取个性化报告</h3>
+                        <p>AI将生成详细的健康分析报告和可行性建议，并持续追踪你的健康状况变化。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="testimonials" class="section section-light">
+             <div class="container">
+                <h2>听听学长学姐怎么说</h2>
+                <div class="services-grid">
+                    <div class="testimonial-card">
+                        <p>"考研压力大的时候，半夜睡不着，多亏了康治AI的心理伙伴，陪我聊了很久，感觉好多了。比跟同学说要轻松，不用担心被评价。真心推荐！"</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=1780&auto=format&fit=crop" alt="用户头像">
+                            <div class="author-info">
+                                <strong>王同学</strong>
+                                <span>计算机科学与技术学院</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <p>"我脸上的痘痘一直反反复复，用了康治的皮肤分析，才知道是清洁不到位加屏障受损。按照它的建议调整了护肤品，现在皮肤稳定多了。比自己瞎试强太多了！"</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1614283233556-f35b0c801435?q=80&w=1887&auto=format&fit=crop" alt="用户头像">
+                            <div class="author-info">
+                                <strong>李同学</strong>
+                                <span>设计艺术学院</span>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="testimonial-card">
+                        <p>"AI给的健身计划比我自己找的靠谱多了，而且还会根据我的食堂菜单给建议，这点真的太贴心了！已经坚持一个月，体脂率明显下降了。"</p>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1552058544-f2b08422138a?q=80&w=1899&auto=format&fit=crop" alt="用户头像">
+                            <div class="author-info">
+                                <strong>张同学</strong>
+                                <span>体育科学学院</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             </div>
+        </section>
+        
+        <section class="cta-section">
+            <div class="container">
+                <h2>准备好拥抱更健康的大学生活了吗？</h2>
+                <p>立即加入康治AI，让科技的力量成为你最坚实的后盾。你的第一个AI健康咨询，我们请客！</p>
+                <a href="chat.html" class="cta-button">免费开始我的健康之旅</a>
+            </div>
+        </section>
+    </main>
 
     <footer class="footer">
         <div class="container">
@@ -357,7 +523,7 @@
                         <li><a href="features.html">功能详解</a></li>
                         <li><a href="how-to-use.html">使用指南 & FAQ</a></li>
                         <li><a href="campus-health.html">校园健康站</a></li>
-                        <li><a href="#">加入我们</a></li>
+                        <li><a href="chat.html">立即咨询</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -375,15 +541,6 @@
             </div>
         </div>
     </footer>
-    
-    <style>
-        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; text-align: left; width: 100%; margin-bottom: 40px; }
-        .footer-col h4 { color: var(--white-color); margin-bottom: 15px; }
-        .footer-links-list { list-style: none; padding: 0; }
-        .footer-links-list li { margin-bottom: 10px; }
-        .footer-links-list a { color: #aeb9c4; text-decoration: none; transition: color 0.3s, padding-left 0.3s; }
-        .footer-links-list a:hover { color: var(--white-color); padding-left: 5px; }
-        .copyright-section { border-top: 1px solid #444; padding-top: 30px; margin-top: 30px; width: 100%; text-align: center; }
-    </style>
+
 </body>
 </html>
