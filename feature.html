@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>功能详解 - 康治AI</title>
+    <style>
+        /* --- 全局样式 (同index.html) --- */
+        :root {
+            --primary-color: #3498db; /* 科技蓝 */
+            --secondary-color: #2ecc71; /* 活力绿 */
+            --dark-color: #2c3e50; /* 深灰蓝 */
+            --light-color: #ecf0f1; /* 浅灰 */
+            --white-color: #ffffff;
+            --text-color: #555;
+            --border-radius: 12px;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--white-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            padding-top: 80px; /* 为固定导航栏预留空间 */
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        h1, h2, h3 { color: var(--dark-color); font-weight: 700; }
+        h1 { font-size: 3em; text-align: center; margin-bottom: 20px;}
+        h2 { font-size: 2.2em; }
+        h3 { font-size: 1.5em; }
+        .page-subtitle { text-align: center; font-size: 1.2em; color: #777; max-width: 700px; margin: 0 auto 80px; }
+        .section { padding: 80px 0; }
+        .section-light { background-color: #f9f9f9; }
+
+        /* --- 导航栏 (同index.html) --- */
+        .navbar { background: var(--white-color); padding: 15px 0; position: fixed; width: 100%; top: 0; left: 0; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .navbar .container { display: flex; justify-content: space-between; align-items: center; }
+        .navbar-logo { font-size: 1.8em; font-weight: bold; color: var(--primary-color); text-decoration: none; }
+        .navbar-logo span { color: var(--secondary-color); }
+        .nav-links { list-style: none; margin: 0; padding: 0; display: flex; }
+        .nav-links li { margin-left: 30px; }
+        .nav-links a { text-decoration: none; color: var(--dark-color); font-weight: 500; transition: color 0.3s ease; }
+        .nav-links a:hover { color: var(--primary-color); }
+        
+        /* --- 特色功能介绍 --- */
+        .feature-showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+        /* 实现奇偶行图片和文字左右交错 */
+        .feature-showcase:nth-child(even) .feature-image-container {
+            order: -1;
+        }
+        .feature-image {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+        .feature-details .icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+        .feature-details h2 {
+            margin-bottom: 20px;
+        }
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+        .feature-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+        .feature-list li::before {
+            content: '✔';
+            color: var(--secondary-color);
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+        
+        /* --- 页脚 (同index.html更新后) --- */
+        .footer { background-color: #212832; color: #aeb9c4; padding-top: 50px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; text-align: left; width: 100%; margin-bottom: 40px; }
+        .footer-col h4 { color: var(--white-color); margin-bottom: 15px; }
+        .footer-links-list { list-style: none; padding: 0; }
+        .footer-links-list li { margin-bottom: 10px; }
+        .footer-links-list a { color: #aeb9c4; text-decoration: none; transition: color 0.3s, padding-left 0.3s; }
+        .footer-links-list a:hover { color: var(--white-color); padding-left: 5px; }
+        .copyright-section { border-top: 1px solid #444; padding-top: 30px; margin-top: 30px; width: 100%; text-align: center; }
+        .copyright { font-size: 0.9em; }
+
+        @media (max-width: 768px) {
+            .feature-showcase { grid-template-columns: 1fr; }
+            .feature-showcase:nth-child(even) .feature-image-container { order: 1; }
+            .feature-image-container { margin-top: 30px; }
+            body { padding-top: 70px; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="index.html" class="navbar-logo">康治AI<span>+</span></a>
+            <ul class="nav-links">
+                <li><a href="features.html">功能详解</a></li>
+                <li><a href="how-to-use.html">如何使用</a></li>
+                <li><a href="campus-health.html">校园健康站</a></li>
+                <li><a href="index.html#testimonials">用户故事</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main>
+        <section class="section">
+            <div class="container">
+                <h1>深入了解康治AI的核心能力</h1>
+                <p class="page-subtitle">我们利用前沿的人工智能技术，为你提供精准、私密且便捷的健康服务。探索各项功能的无限可能。</p>
+
+                <div class="feature-showcase">
+                    <div class="feature-details">
+                        <div class="icon">🧠</div>
+                        <h2>AI心理咨询师</h2>
+                        <p>基于自然语言处理（NLP）和情感计算模型，我们的AI伙伴能理解你的情绪，提供共情式对话，帮助你探索内心世界。</p>
+                        <ul class="feature-list">
+                            <li>24/7全天候在线，随时提供情绪支持。</li>
+                            <li>引导式对话，助你理清思绪，找到问题根源。</li>
+                            <li>正念练习、认知行为疗法(CBT)等多种干预工具。</li>
+                            <li>定期情绪追踪，生成你的个人心理健康报告。</li>
+                        </ul>
+                    </div>
+                    <div class="feature-image-container">
+                        <img src="https://images.unsplash.com/photo-1534685785743-5a3d5a623673?q=80&w=1887&auto=format&fit=crop" alt="AI心理咨询界面示意" class="feature-image">
+                    </div>
+                </div>
+
+                <div class="feature-showcase">
+                    <div class="feature-details">
+                        <div class="icon">🧴</div>
+                        <h2>智能皮肤健康分析</h2>
+                        <p>采用计算机视觉技术，通过对数百万皮肤病学图像的学习，AI能够识别多种常见皮肤问题，并给出科学建议。</p>
+                        <ul class="feature-list">
+                            <li>高精度识别痘痘、粉刺、色斑、皮炎等问题。</li>
+                            <li>分析皮肤类型（油性、干性、混合性）和状态。</li>
+                            <li>推荐合适的护肤成分和产品（非广告）。</li>
+                            <li>持续记录皮肤变化，验证护肤方案有效性。</li>
+                        </ul>
+                    </div>
+                    <div class="feature-image-container">
+                        <img src="https://images.unsplash.com/photo-1620912189862-bb8ae4235459?q=80&w=1887&auto=format&fit=crop" alt="智能皮肤分析界面示意" class="feature-image">
+                    </div>
+                </div>
+
+                <div class="feature-showcase">
+                    <div class="feature-details">
+                        <div class="icon">🥗</div>
+                        <h2>个性化营养与运动规划</h2>
+                        <p>结合你的个人数据（身高、体重、目标）和偏好，AI算法为你创建动态调整的、科学的健康生活方案。</p>
+                        <ul class="feature-list">
+                            <li>智能生成每日食谱，卡路里、宏量营养素一目了然。</li>
+                            <li>兼容校园食堂菜品，提供更接地气的饮食建议。</li>
+                            <li>根据你的体能水平和喜好，推荐运动项目和强度。</li>
+                            <li>与运动手环数据同步，动态调整计划。</li>
+                        </ul>
+                    </div>
+                    <div class="feature-image-container">
+                        <img src="https://images.unsplash.com/photo-1543362906-acfc16c67564?q=80&w=1965&auto=format&fit=crop" alt="个性化营养规划界面示意" class="feature-image">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        </footer>
+</body>
+</html>
